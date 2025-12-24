@@ -2,6 +2,7 @@ import Button from "@/components/Button";
 import ScreenWrapper from "@/components/ScreenWrapper";
 import { theme } from "@/constants/theme";
 import { hp } from "@/helpers/common";
+import { useRouter } from "expo-router";
 import React from "react";
 import {
   Image,
@@ -15,6 +16,7 @@ import logo from "../assets/illustration/Group 5.png";
 import image from "../assets/illustration/Rectangle-1.png";
 
 const Login = () => {
+  const router = useRouter();
   return (
     <ScreenWrapper bg={theme.colors.primary}>
       <View style={styles.container}>
@@ -42,7 +44,11 @@ const Login = () => {
         </View>
         <View style={styles.footer}>
           <Text style={styles.footertxt}>Don't have any Account ?</Text>
-          <Pressable>
+          <Pressable
+            onPress={() => {
+              router.navigate("/register");
+            }}
+          >
             <Text style={styles.log}>Register Now</Text>
           </Pressable>
         </View>
