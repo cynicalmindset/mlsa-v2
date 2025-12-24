@@ -107,6 +107,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     paddingHorizontal: 20,
     opacity: 0.8,
+    color: "white",
     //marginBottom: hp(2),
   },
   lable: {
@@ -122,7 +123,7 @@ const styles = StyleSheet.create({
     //paddingHorizontal: hp(2),
     // flex: 1,
     justifyContent: "center",
-    marginBottom: hp(4),
+    marginBottom: hp(8),
     gap: 6,
   },
   log: {

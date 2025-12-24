@@ -59,19 +59,25 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
+    paddingHorizontal: wp(4),
   },
   logo: {
     width: wp(16),
     height: wp(16),
     resizeMode: "contain",
-    marginLeft: hp(2),
+    //marginLeft: hp(2),
     marginBottom: hp(12),
   },
   heroImage: {
     width: wp(80),
     height: hp(50),
-    resizeMode: "contain",
+    //resizeMode: "contain",
     opacity: 0.7,
+
+    // alignSelf: "flex-end",
+    //justifyContent: "flex-end",
+
+    //marginRight: -hp(2),
   },
   middle: {
     position: "absolute",
@@ -97,7 +103,7 @@ const styles = StyleSheet.create({
   },
   button: {
     paddingHorizontal: wp(5),
-    paddingBottom: hp(6),
+    paddingBottom: hp(8),
     marginTop: "auto",
     gap: hp(2),
   },

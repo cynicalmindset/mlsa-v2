@@ -111,6 +111,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     paddingHorizontal: 20,
     opacity: 0.8,
+    color: "white",
     //marginBottom: hp(2),
   },
   lable: {
@@ -119,7 +120,7 @@ const styles = StyleSheet.create({
     marginHorizontal: hp(2),
   },
   button: {
-    marginTop: hp(8),
+    marginTop: hp(6),
   },
   footer: {
     flexDirection: "row",
@@ -132,6 +133,7 @@ const styles = StyleSheet.create({
   log: {
     color: theme.colors.green,
     fontWeight: "400",
+    marginBottom: hp(4),
   },
   footertxt: {
     color: theme.colors.offwhite,
