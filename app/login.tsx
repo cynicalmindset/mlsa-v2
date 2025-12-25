@@ -14,6 +14,7 @@ import {
   TextInput,
   View,
 } from "react-native";
+import Icon from "../assets/icons";
 import logo from "../assets/illustration/Group 5.png";
 import image from "../assets/illustration/Rectangle-1.png";
 
@@ -53,25 +54,41 @@ const Login = () => {
         {/* EMAIL */}
         <View style={styles.inputcontainer}>
           <Text style={styles.lable}>Email</Text>
-          <TextInput
-            style={styles.input}
-            placeholder="241@kiit.ac.in"
-            placeholderTextColor={theme.colors.offwhite}
-            onChangeText={(value) => {
-              emailref.current = value;
-            }}
-          ></TextInput>
+          <View style={styles.inputWrapper}>
+            <Icon
+              name={"mail"}
+              color={theme.colors.offwhite}
+              size={22}
+              strokeWidth={1.2}
+            ></Icon>
+            <TextInput
+              style={styles.input}
+              placeholder="241@kiit.ac.in"
+              placeholderTextColor={theme.colors.offwhite}
+              onChangeText={(value) => {
+                emailref.current = value;
+              }}
+            ></TextInput>
+          </View>
           {/* PASSWORD */}
           <Text style={styles.lable}>Password</Text>
-          <TextInput
-            style={styles.input}
-            secureTextEntry
-            placeholder="xxxxxxxx"
-            placeholderTextColor={theme.colors.offwhite}
-            onChangeText={(value) => {
-              passwordref.current = value;
-            }}
-          ></TextInput>
+          <View style={styles.inputWrapper}>
+            <Icon
+              name={"lock"}
+              color={theme.colors.offwhite}
+              size={22}
+              strokeWidth={1.2}
+            />
+            <TextInput
+              style={styles.input}
+              secureTextEntry
+              placeholder="xxxxxxxx"
+              placeholderTextColor={theme.colors.offwhite}
+              onChangeText={(value) => {
+                passwordref.current = value;
+              }}
+            ></TextInput>
+          </View>
           <Button
             title="Start Exploring!"
             buttonstyle={styles.button}
@@ -150,7 +167,7 @@ const styles = StyleSheet.create({
   lable: {
     color: theme.colors.offwhite,
     paddingVertical: 10,
-    marginHorizontal: hp(2),
+    //marginHorizontal: hp(2),
   },
   button: {
     marginTop: hp(8),
@@ -169,5 +186,14 @@ const styles = StyleSheet.create({
   },
   footertxt: {
     color: theme.colors.offwhite,
+  },
+  inputWrapper: {
+    flexDirection: "row",
+    alignItems: "center",
+    backgroundColor: theme.colors.lightPrimary,
+    height: hp(7),
+    borderRadius: 10,
+    paddingHorizontal: 16,
+    opacity: 1,
   },
 });

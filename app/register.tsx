@@ -1,3 +1,4 @@
+import Icon from "@/assets/icons";
 import Button from "@/components/Button";
 import ScreenWrapper from "@/components/ScreenWrapper";
 import { theme } from "@/constants/theme";
@@ -59,33 +60,60 @@ const Register = () => {
         <Text style={styles.tagline}>Let's Get{"\n"}Started</Text>
         <View style={styles.inputcontainer}>
           <Text style={styles.lable}>Username</Text>
-          <TextInput
-            style={styles.input}
-            placeholder="potato gupta"
-            placeholderTextColor={theme.colors.offwhite}
-            onChangeText={(value) => {
-              nameref.current = value;
-            }}
-          ></TextInput>
+          {/* USERNAME */}
+          <View style={styles.inputWrapper}>
+            <Icon
+              name={"user"}
+              size={22}
+              color={theme.colors.offwhite}
+              strokeWidth={1.2}
+            />
+            <TextInput
+              style={styles.input}
+              placeholder="potato gupta"
+              placeholderTextColor={theme.colors.offwhite}
+              onChangeText={(value) => {
+                nameref.current = value;
+              }}
+            ></TextInput>
+          </View>
+          {/* EMAIL */}
           <Text style={styles.lable}>Email</Text>
-          <TextInput
-            style={styles.input}
-            placeholder="241@kiit.ac.in"
-            placeholderTextColor={theme.colors.offwhite}
-            onChangeText={(value) => {
-              emailref.current = value;
-            }}
-          ></TextInput>
+          <View style={styles.inputWrapper}>
+            <Icon
+              name={"mail"}
+              size={22}
+              color={theme.colors.offwhite}
+              strokeWidth={1.2}
+            />
+            <TextInput
+              style={styles.input}
+              placeholder="241@kiit.ac.in"
+              placeholderTextColor={theme.colors.offwhite}
+              onChangeText={(value) => {
+                emailref.current = value;
+              }}
+            ></TextInput>
+          </View>
+          {/* PASSWORD */}
           <Text style={styles.lable}>Password</Text>
-          <TextInput
-            style={styles.input}
-            placeholder="xxxxxxxx"
-            secureTextEntry
-            placeholderTextColor={theme.colors.offwhite}
-            onChangeText={(value) => {
-              passwordref.current = value;
-            }}
-          ></TextInput>
+          <View style={styles.inputWrapper}>
+            <Icon
+              name={"lock"}
+              size={22}
+              color={theme.colors.offwhite}
+              strokeWidth={1.2}
+            />
+            <TextInput
+              style={styles.input}
+              placeholder="xxxxxxxx"
+              secureTextEntry
+              placeholderTextColor={theme.colors.offwhite}
+              onChangeText={(value) => {
+                passwordref.current = value;
+              }}
+            ></TextInput>
+          </View>
           <Button
             title="Lets GO!!"
             buttonstyle={styles.button}
@@ -164,7 +192,7 @@ const styles = StyleSheet.create({
   lable: {
     color: theme.colors.offwhite,
     paddingVertical: 10,
-    marginHorizontal: hp(2),
+    //marginHorizontal: hp(2),
   },
   button: {
     marginTop: hp(6),
@@ -184,5 +212,14 @@ const styles = StyleSheet.create({
   },
   footertxt: {
     color: theme.colors.offwhite,
+  },
+  inputWrapper: {
+    flexDirection: "row",
+    alignItems: "center",
+    backgroundColor: theme.colors.lightPrimary,
+    height: hp(7),
+    borderRadius: 10,
+    paddingHorizontal: 16,
+    opacity: 1,
   },
 });
