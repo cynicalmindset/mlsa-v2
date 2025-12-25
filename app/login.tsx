@@ -2,9 +2,11 @@ import Button from "@/components/Button";
 import ScreenWrapper from "@/components/ScreenWrapper";
 import { theme } from "@/constants/theme";
 import { hp } from "@/helpers/common";
+import { supabase } from "@/lib/supabase";
 import { useRouter } from "expo-router";
-import React from "react";
+import React, { useRef, useState } from "react";
 import {
+  Alert,
   Image,
   Pressable,
   StyleSheet,
@@ -16,6 +18,27 @@ import logo from "../assets/illustration/Group 5.png";
 import image from "../assets/illustration/Rectangle-1.png";
 
 const Login = () => {
+  const emailref = useRef("");
+  const passwordref = useRef("");
+  const [loading, setloading] = useState(false);
+  const onsubmit = async () => {
+    if (!emailref.current || !passwordref.current) {
+      Alert.alert("fill all details");
+      return;
+    }
+    let email = emailref.current.trim();
+    let password = passwordref.current.trim();
+    setloading(true);
+    const { error } = await supabase.auth.signInWithPassword({
+      email,
+      password,
+    });
+    setloading(false);
+    console.log("error", error);
+    if (error) {
+      Alert.alert("login failed", error.message);
+    }
+  };
   const router = useRouter();
   return (
     <ScreenWrapper bg={theme.colors.primary}>
@@ -27,20 +50,34 @@ const Login = () => {
         <Text style={styles.tagline}>
           Hey,{"\n"}Welcome{"\n"}Back
         </Text>
+        {/* EMAIL */}
         <View style={styles.inputcontainer}>
           <Text style={styles.lable}>Email</Text>
           <TextInput
             style={styles.input}
             placeholder="241@kiit.ac.in"
             placeholderTextColor={theme.colors.offwhite}
+            onChangeText={(value) => {
+              emailref.current = value;
+            }}
           ></TextInput>
+          {/* PASSWORD */}
           <Text style={styles.lable}>Password</Text>
           <TextInput
             style={styles.input}
+            secureTextEntry
             placeholder="xxxxxxxx"
             placeholderTextColor={theme.colors.offwhite}
+            onChangeText={(value) => {
+              passwordref.current = value;
+            }}
           ></TextInput>
-          <Button title="Start Exploring!" buttonstyle={styles.button}></Button>
+          <Button
+            title="Start Exploring!"
+            buttonstyle={styles.button}
+            loading={loading}
+            onPress={onsubmit}
+          ></Button>
         </View>
         <View style={styles.footer}>
           <Text style={styles.footertxt}>Don't have any Account ?</Text>
