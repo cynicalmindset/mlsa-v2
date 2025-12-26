@@ -13,7 +13,11 @@ import { Alert, Image, Pressable, StyleSheet, Text, View } from "react-native";
 
 const Home = () => {
   const router = useRouter();
-  const onpress = () => {};
+  // const onpress = async () => {
+  //   if (user?.role === "admin") {
+  //     router.push("/admin");
+  //   }
+  // };
   const { setAuth, user } = useAuth();
   const onlogout = async () => {
     setAuth(false);
@@ -27,7 +31,15 @@ const Home = () => {
       <View style={styles.container}>
         {/* HEADER */}
         <View style={styles.header}>
-          <Pressable onPress={onpress}>
+          <Pressable
+            onPress={() => {
+              if (user?.role === "admin") {
+                router.push("/admin");
+              } else {
+                Alert.alert("Access denied");
+              }
+            }}
+          >
             <Image source={logo} style={styles.headerlogo} />
           </Pressable>
           <Text style={styles.text}>Home</Text>
