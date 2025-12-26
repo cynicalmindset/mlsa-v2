@@ -5,7 +5,7 @@ import { hp, wp } from "@/helpers/common";
 import { useRouter } from "expo-router";
 import React from "react";
 import { Image, StyleSheet, Text, View } from "react-native";
-import logo from "../assets/illustration/Group 5.png";
+import logo from "../assets/illustration/Group_5.png";
 import hero from "../assets/illustration/Rectangle.png";
 
 const index = () => {

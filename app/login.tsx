@@ -15,7 +15,7 @@ import {
   View,
 } from "react-native";
 import Icon from "../assets/icons";
-import logo from "../assets/illustration/Group 5.png";
+import logo from "../assets/illustration/Group_5.png";
 import image from "../assets/illustration/Rectangle-1.png";
 
 const Login = () => {

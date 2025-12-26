@@ -15,7 +15,7 @@ import {
   TextInput,
   View,
 } from "react-native";
-import logo from "../assets/illustration/Group 5.png";
+import logo from "../assets/illustration/Group_5.png";
 import image from "../assets/illustration/Rectangle-2.png";
 
 const Register = () => {
