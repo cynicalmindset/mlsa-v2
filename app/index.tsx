@@ -7,9 +7,27 @@ import React from "react";
 import { Image, StyleSheet, Text, View } from "react-native";
 import logo from "../assets/illustration/Group 5.png";
 import hero from "../assets/illustration/Rectangle.png";
+
 const index = () => {
-  // eslint-disable-next-line react-hooks/rules-of-hooks
+  //   // eslint-disable-next-line react-hooks/rules-of-hooks
   const router = useRouter();
+  //   // eslint-disable-next-line react-hooks/rules-of-hooks
+  //   const user = useAuth();
+  //   // eslint-disable-next-line react-hooks/rules-of-hooks
+  //   useEffect(() => {
+  //     if (user) {
+  //       router.replace("/Home");
+  //     }
+  //   }, [user]);
+
+  //   // While redirecting → show loading
+  //   if (user) {
+  //     return (
+  //       <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+  //         <Loading />
+  //       </View>
+  //     );
+  //   }
   return (
     <ScreenWrapper bg={theme.colors.primary}>
       <View style={styles.container}>
