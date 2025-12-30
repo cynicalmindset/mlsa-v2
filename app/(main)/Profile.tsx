@@ -106,9 +106,11 @@ const UserHeader = ({
 
           {/* USERNAME AND ALL DETAILS STUFF */}
 
-          <View style={{ alignItems: "center", gap: 4 }}>
+          <View style={{ alignItems: "center", gap: 4, marginBottom: hp(3) }}>
             <Text style={styles.username}>{user && user.name}</Text>
-            <Text style={styles.bio}>{user && user.bio}</Text>
+            {user && user.bio && (
+              <Text style={styles.bio}>{user && user.bio}</Text>
+            )}
           </View>
           {/* EMAIl */}
 
@@ -142,7 +144,7 @@ const UserHeader = ({
                 opacity: 0.4,
               }}
             >
-              this app is in beta mode , for bugs contact{"\n"}-
+              this app is in beta mode , for bugs contact
               yashraj.02594656@gmail.com
             </Text>
           </View>
@@ -192,8 +194,10 @@ const styles = StyleSheet.create({
   bio: {
     fontSize: hp(1.7),
     color: theme.colors.offwhite,
-    opacity: 0.7,
-    fontWeight: "500",
+    opacity: 0.6,
+    fontWeight: "400",
+    marginTop: hp(2),
+    paddingHorizontal: wp(10),
   },
   emailbox: {
     flexDirection: "row",

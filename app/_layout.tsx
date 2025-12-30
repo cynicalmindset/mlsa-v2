@@ -23,7 +23,7 @@ const MainLayout = () => {
       if (session) {
         //set auth
         setAuth(session?.user);
-        updateUserData(session?.user);
+        updateUserData(session?.user, session?.user?.email);
         // navigate
         router.replace("/Home");
       } else {
@@ -34,10 +34,10 @@ const MainLayout = () => {
       }
     });
   }, []);
-  const updateUserData = async (user: User) => {
+  const updateUserData = async (user: User, email: string | undefined) => {
     let res = await getUserData(user?.id);
     // console.log("got user data: ", res);
-    if (res.success) setUserData(res.data);
+    if (res.success) setUserData({ ...res.data, email });
   };
   return <Stack screenOptions={{ headerShown: false }} />;
 };
