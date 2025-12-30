@@ -5,7 +5,7 @@ import ScreenWrapper from "@/components/ScreenWrapper";
 import { theme } from "@/constants/theme";
 import { useAuth } from "@/context/authcontext";
 import { hp, wp } from "@/helpers/common";
-import { getuserImagesrc } from "@/services/imageService";
+import { getuserImagesrc, uploadfile } from "@/services/imageService";
 import { updateuser } from "@/services/userService";
 import * as ImagePicker from "expo-image-picker";
 import { useRouter } from "expo-router";
@@ -36,6 +36,19 @@ const Editprofile = () => {
       return;
     }
     setloading(true);
+    if (typeof image === "string" && image.startsWith("file://")) {
+      const imageRes = await uploadfile("profiles", image, true);
+
+      if (imageRes.success && imageRes.data) {
+        userData.image = imageRes.data;
+      } else {
+        Alert.alert("Image upload failed");
+        setloading(false);
+        return;
+      }
+    }
+
+    //user update
     const res = await updateuser(currentUser?.id, userData);
     setloading(false);
     if (res.success) {
@@ -61,7 +74,7 @@ const Editprofile = () => {
   const [user, setuser] = useState<{
     name: string;
     phone: string;
-    image: { uri: string } | string | null;
+    image: string | null;
     bio: string;
     address: string;
   }>({
