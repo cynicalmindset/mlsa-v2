@@ -10,6 +10,7 @@ import { useRouter } from "expo-router";
 import React from "react";
 import { Alert, Image, Pressable, StyleSheet, Text, View } from "react-native";
 //import { View } from "react-native-reanimated/lib/typescript/Animated";
+import group from "@/assets/illustration/group.jpeg";
 
 const Home = () => {
   const router = useRouter();
@@ -55,6 +56,93 @@ const Home = () => {
             />
           </Pressable>
         </View>
+
+        <View
+          style={{
+            flexDirection: "column",
+            justifyContent: "space-between",
+            alignItems: "center",
+            gap: hp(4),
+          }}
+        >
+          {/* HEADER CARD  */}
+          <View style={styles.headercard}>
+            {/* //<Text>hi</Text> */}
+            <View
+              style={{
+                justifyContent: "space-between",
+                flexDirection: "column",
+                //alignItems: "center",
+                gap: 10,
+              }}
+            >
+              <View style={styles.left}>
+                <Text
+                  style={{
+                    fontSize: hp(4),
+                    fontWeight: "500",
+                    color: "white",
+                    //marginBottom: 3,
+                    //marginTop: -6,
+                    //marginTop: 2,
+                  }}
+                >
+                  MLSA
+                </Text>
+                <Text
+                  style={{
+                    color: "white",
+                    opacity: 0.7,
+                    fontSize: hp(1.5),
+                    //marginBottom: 10,
+                    marginTop: -3,
+                  }}
+                >
+                  Know more about our Society!
+                </Text>
+                <Pressable
+                  style={{
+                    backgroundColor: "#552BD4",
+                    padding: 8,
+                    alignItems: "center",
+                    borderRadius: theme.radius.sm,
+                    borderCurve: "continuous",
+                    maxWidth: 100,
+                    marginTop: 4,
+                  }}
+                  onPress={() => {
+                    router.navigate("/Society");
+                  }}
+                >
+                  <Text style={{ color: "white" }}>Details</Text>
+                </Pressable>
+              </View>
+
+              <View style={styles.right}>
+                <Image style={styles.headerimg} source={group}></Image>
+              </View>
+            </View>
+          </View>
+
+          {/* SPONSORS */}
+          <View
+            style={{
+              //backgroundColor: "white",
+              width: "100%",
+            }}
+          >
+            <Text
+              style={{
+                color: "white",
+                fontSize: hp(3),
+                fontWeight: "700",
+                marginLeft: hp(2),
+              }}
+            >
+              Sponsors
+            </Text>
+          </View>
+        </View>
       </View>
     </ScreenWrapper>
   );
@@ -67,13 +155,16 @@ const styles = StyleSheet.create({
     flex: 1,
     //marginHorizontal: wp(2),
     backgroundColor: theme.colors.primary,
+    marginHorizontal: hp(2),
+    //alignItems: "center",
+    //justifyContent:'center'
   },
   header: {
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
     //backgroundColor: "white",
-    marginHorizontal: wp(4),
+    //marginHorizontal: wp(4),
   },
   headerlogo: {
     height: hp(8),
@@ -88,5 +179,40 @@ const styles = StyleSheet.create({
   avatar: {
     height: hp(12),
     width: wp(12),
+  },
+  headercard: {
+    backgroundColor: "#09192D",
+    height: hp(20),
+    width: "100%",
+    marginTop: hp(2),
+    borderRadius: theme.radius.xxl,
+    // padding: 20,
+    paddingHorizontal: wp(5),
+    paddingVertical: hp(1),
+  },
+  left: {
+    flexDirection: "column",
+    position: "absolute",
+    //left: wp(5),
+    width: "50%",
+    //backgroundColor: "white",
+    //justifyContent: "space-between",
+    gap: 16,
+  },
+  right: {
+    // width: "50%",
+    //backgroundColor: "white",
+    position: "absolute",
+    height: hp(12),
+    width: "50%",
+    right: 0,
+    top: hp(2.5),
+    transform: [{ rotate: "2deg" }, { scale: 1.05 }],
+  },
+  headerimg: {
+    height: "100%",
+    width: "100%",
+    borderRadius: theme.radius.lg,
+    resizeMode: "contain",
   },
 });
