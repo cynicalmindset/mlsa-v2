@@ -1,4 +1,5 @@
 import logo from "@/assets/illustration/Group_5.png";
+import project from "@/assets/illustration/project.jpeg";
 import Avatar from "@/components/Avatar";
 import ScreenWrapper from "@/components/ScreenWrapper";
 import { theme } from "@/constants/theme";
@@ -6,11 +7,24 @@ import { useAuth } from "@/context/authcontext";
 import { hp, wp } from "@/helpers/common";
 import { supabase } from "@/lib/supabase";
 //import { useRoute } from "@react-navigation/native";
+import funny from "@/assets/illustration/funny.jpeg";
 import { useRouter } from "expo-router";
 import React from "react";
-import { Alert, Image, Pressable, StyleSheet, Text, View } from "react-native";
+import {
+  Alert,
+  Dimensions,
+  Image,
+  Pressable,
+  ScrollView,
+  StyleSheet,
+  Text,
+  View,
+} from "react-native";
+
 //import { View } from "react-native-reanimated/lib/typescript/Animated";
 import group from "@/assets/illustration/group.jpeg";
+//import { ScrollView } from "react-native-reanimated/lib/typescript/Animated";
+const { width } = Dimensions.get("window");
 
 const Home = () => {
   const router = useRouter();
@@ -65,64 +79,188 @@ const Home = () => {
             gap: hp(4),
           }}
         >
-          {/* HEADER CARD  */}
-          <View style={styles.headercard}>
-            {/* //<Text>hi</Text> */}
-            <View
-              style={{
-                justifyContent: "space-between",
-                flexDirection: "column",
-                //alignItems: "center",
-                gap: 10,
-              }}
-            >
-              <View style={styles.left}>
-                <Text
+          {/* HEADER CARDs  */}
+          <ScrollView
+            horizontal
+            showsHorizontalScrollIndicator={false}
+            pagingEnabled
+          >
+            <View style={{ flexDirection: "row", gap: 16 }}>
+              <View style={styles.headercard}>
+                {/* //<Text>hi</Text> */}
+                <View
                   style={{
-                    fontSize: hp(4),
-                    fontWeight: "500",
-                    color: "white",
-                    //marginBottom: 3,
-                    //marginTop: -6,
-                    //marginTop: 2,
+                    justifyContent: "space-between",
+                    flexDirection: "column",
+                    //alignItems: "center",
+                    gap: 10,
                   }}
                 >
-                  MLSA
-                </Text>
-                <Text
-                  style={{
-                    color: "white",
-                    opacity: 0.7,
-                    fontSize: hp(1.5),
-                    //marginBottom: 10,
-                    marginTop: -3,
-                  }}
-                >
-                  Know how this all got Started!
-                </Text>
-                <Pressable
-                  style={{
-                    backgroundColor: "#552BD4",
-                    padding: 8,
-                    alignItems: "center",
-                    borderRadius: theme.radius.sm,
-                    borderCurve: "continuous",
-                    maxWidth: 100,
-                    marginTop: 4,
-                  }}
-                  onPress={() => {
-                    router.navigate("/Society");
-                  }}
-                >
-                  <Text style={{ color: "white" }}>Details</Text>
-                </Pressable>
+                  <View style={styles.left}>
+                    <Text
+                      style={{
+                        fontSize: hp(4),
+                        fontWeight: "500",
+                        color: "white",
+                        //marginBottom: 3,
+                        //marginTop: -6,
+                        //marginTop: 2,
+                      }}
+                    >
+                      MLSA
+                    </Text>
+                    <Text
+                      style={{
+                        color: "white",
+                        opacity: 0.7,
+                        fontSize: hp(1.5),
+                        //marginBottom: 10,
+                        marginTop: -3,
+                      }}
+                    >
+                      Know how this all got Started!
+                    </Text>
+                    <Pressable
+                      style={{
+                        backgroundColor: "#552BD4",
+                        padding: 8,
+                        alignItems: "center",
+                        borderRadius: theme.radius.sm,
+                        borderCurve: "continuous",
+                        maxWidth: 100,
+                        marginTop: 4,
+                      }}
+                      onPress={() => {
+                        router.navigate("/Society");
+                      }}
+                    >
+                      <Text style={{ color: "white" }}>Details</Text>
+                    </Pressable>
+                  </View>
+
+                  <View style={styles.right}>
+                    <Image style={styles.headerimg} source={group}></Image>
+                  </View>
+                </View>
               </View>
 
-              <View style={styles.right}>
-                <Image style={styles.headerimg} source={group}></Image>
+              <View style={styles.headercard}>
+                {/* //<Text>hi</Text> */}
+                <View
+                  style={{
+                    justifyContent: "space-between",
+                    flexDirection: "column",
+                    //alignItems: "center",
+                    gap: 10,
+                  }}
+                >
+                  <View style={styles.left}>
+                    <Text
+                      style={{
+                        fontSize: hp(3.5),
+                        fontWeight: "500",
+                        color: "white",
+                        //marginBottom: 3,
+                        //marginTop: -6,
+                        //marginTop: 2,
+                      }}
+                    >
+                      Gallery
+                    </Text>
+                    <Text
+                      style={{
+                        color: "white",
+                        opacity: 0.7,
+                        fontSize: hp(1.5),
+                        //marginBottom: 10,
+                        marginTop: -3,
+                      }}
+                    >
+                      Some of our most memorial moments
+                    </Text>
+                    <Pressable
+                      style={{
+                        backgroundColor: "#552BD4",
+                        padding: 8,
+                        alignItems: "center",
+                        borderRadius: theme.radius.sm,
+                        borderCurve: "continuous",
+                        maxWidth: 100,
+                        marginTop: 4,
+                      }}
+                      onPress={() => {
+                        router.navigate("/Society");
+                      }}
+                    >
+                      <Text style={{ color: "white" }}>Details</Text>
+                    </Pressable>
+                  </View>
+
+                  <View style={styles.right}>
+                    <Image style={styles.headerimg} source={funny}></Image>
+                  </View>
+                </View>
+              </View>
+
+              <View style={styles.headercard}>
+                {/* //<Text>hi</Text> */}
+                <View
+                  style={{
+                    justifyContent: "space-between",
+                    flexDirection: "column",
+                    //alignItems: "center",
+                    gap: 10,
+                  }}
+                >
+                  <View style={styles.left}>
+                    <Text
+                      style={{
+                        fontSize: hp(3.5),
+                        fontWeight: "500",
+                        color: "white",
+                        //marginBottom: 3,
+                        //marginTop: -6,
+                        //marginTop: 2,
+                      }}
+                    >
+                      Projects
+                    </Text>
+                    <Text
+                      style={{
+                        color: "white",
+                        opacity: 0.7,
+                        fontSize: hp(1.5),
+                        //marginBottom: 10,
+                        marginTop: -3,
+                      }}
+                    >
+                      thats what make us {"\n"}Stand out!
+                    </Text>
+                    <Pressable
+                      style={{
+                        backgroundColor: "#552BD4",
+                        padding: 8,
+                        alignItems: "center",
+                        borderRadius: theme.radius.sm,
+                        borderCurve: "continuous",
+                        maxWidth: 100,
+                        marginTop: 4,
+                      }}
+                      onPress={() => {
+                        router.navigate("/Society");
+                      }}
+                    >
+                      <Text style={{ color: "white" }}>Details</Text>
+                    </Pressable>
+                  </View>
+
+                  <View style={styles.right}>
+                    <Image style={styles.headerimg} source={project}></Image>
+                  </View>
+                </View>
               </View>
             </View>
-          </View>
+          </ScrollView>
 
           {/* SPONSORS */}
           <View
@@ -183,10 +321,9 @@ const styles = StyleSheet.create({
   headercard: {
     backgroundColor: "#09192D",
     height: hp(20),
-    width: "100%",
+    width: width - wp(10), // 👈 key change
     marginTop: hp(2),
     borderRadius: theme.radius.xxl,
-    // padding: 20,
     paddingHorizontal: wp(5),
     paddingVertical: hp(1),
   },
@@ -213,6 +350,6 @@ const styles = StyleSheet.create({
     height: "100%",
     width: "100%",
     borderRadius: theme.radius.lg,
-    resizeMode: "contain",
+    //resizeMode: "contain",
   },
 });
