@@ -23,11 +23,13 @@ import {
 
 //import { View } from "react-native-reanimated/lib/typescript/Animated";
 import group from "@/assets/illustration/group.jpeg";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 //import { ScrollView } from "react-native-reanimated/lib/typescript/Animated";
 const { width } = Dimensions.get("window");
 
 const Home = () => {
   const router = useRouter();
+  const insert = useSafeAreaInsets();
   // const onpress = async () => {
   //   if (user?.role === "admin") {
   //     router.push("/admin");
@@ -280,8 +282,20 @@ const Home = () => {
               Sponsors
             </Text>
           </View>
+
+          {/* SPONSORS LOGO SECTIONS */}
         </View>
       </View>
+      {/* BOTTOM BARRRRRRRRRRRRRRRR */}
+      {/* <View
+        style={{
+          paddingBottom: insert.bottom,
+          alignItems: "center",
+          marginBottom: wp(4),
+        }}
+      >
+        <Bottombar />
+      </View> */}
     </ScreenWrapper>
   );
 };
