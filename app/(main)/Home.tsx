@@ -85,7 +85,7 @@ const Home = () => {
             showsHorizontalScrollIndicator={false}
             pagingEnabled
           >
-            <View style={{ flexDirection: "row", gap: 16 }}>
+            <View style={{ flexDirection: "row", gap: 8 }}>
               <View style={styles.headercard}>
                 {/* //<Text>hi</Text> */}
                 <View
@@ -180,7 +180,7 @@ const Home = () => {
                     </Text>
                     <Pressable
                       style={{
-                        backgroundColor: "#552BD4",
+                        backgroundColor: "#10a151ff",
                         padding: 8,
                         alignItems: "center",
                         borderRadius: theme.radius.sm,
@@ -192,7 +192,7 @@ const Home = () => {
                         router.navigate("/Society");
                       }}
                     >
-                      <Text style={{ color: "white" }}>Details</Text>
+                      <Text style={{ color: "white" }}>Explore</Text>
                     </Pressable>
                   </View>
 
@@ -238,7 +238,7 @@ const Home = () => {
                     </Text>
                     <Pressable
                       style={{
-                        backgroundColor: "#552BD4",
+                        backgroundColor: "#ff8843ff",
                         padding: 8,
                         alignItems: "center",
                         borderRadius: theme.radius.sm,
@@ -250,7 +250,7 @@ const Home = () => {
                         router.navigate("/Society");
                       }}
                     >
-                      <Text style={{ color: "white" }}>Details</Text>
+                      <Text style={{ color: "white" }}>Explore</Text>
                     </Pressable>
                   </View>
 
