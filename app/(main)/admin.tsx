@@ -77,6 +77,9 @@ const Admin = () => {
                 justifyContent: "center",
                 borderRadius: theme.radius.xxl,
               }}
+              onPress={() => {
+                router.navigate("/AddVideo");
+              }}
             >
               <Text style={{ color: "white", opacity: 0.6 }}>Gallery</Text>
             </Pressable>

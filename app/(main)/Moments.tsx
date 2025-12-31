@@ -12,7 +12,7 @@ const AddSponsors = () => {
   return (
     <ScreenWrapper bg={theme.colors.primary}>
       <View style={{ marginHorizontal: hp(2), marginTop: hp(2) }}>
-        <Header title="Add Sponsor" showavatar={true} />
+        <Header title="Core Memories" showavatar={true} />
       </View>
     </ScreenWrapper>
   );
