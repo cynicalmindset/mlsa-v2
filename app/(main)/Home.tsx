@@ -98,7 +98,7 @@ const Home = () => {
                     marginTop: -3,
                   }}
                 >
-                  Know more about our Society!
+                  Know how this all got Started!
                 </Text>
                 <Pressable
                   style={{
