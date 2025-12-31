@@ -2,11 +2,13 @@ import Header from "@/components/Header";
 import ScreenWrapper from "@/components/ScreenWrapper";
 import { theme } from "@/constants/theme";
 import { hp, wp } from "@/helpers/common";
+import { useRouter } from "expo-router";
 import React from "react";
 import { Pressable, StyleSheet, Text, View } from "react-native";
 //import { View } from "react-native-reanimated/lib/typescript/Animated";
 
 const Admin = () => {
+  const router = useRouter();
   return (
     <ScreenWrapper bg={theme.colors.primary}>
       <View
@@ -86,6 +88,9 @@ const Admin = () => {
                 alignItems: "center",
                 justifyContent: "center",
                 borderRadius: theme.radius.xxl,
+              }}
+              onPress={() => {
+                router.navigate("/AddSponsors");
               }}
             >
               <Text style={{ color: "white", opacity: 0.6 }}>Sponsors</Text>

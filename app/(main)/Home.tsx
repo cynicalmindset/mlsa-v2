@@ -284,6 +284,12 @@ const Home = () => {
           </View>
 
           {/* SPONSORS LOGO SECTIONS */}
+
+          <ScrollView
+            horizontal
+            showsHorizontalScrollIndicator={false}
+            pagingEnabled
+          ></ScrollView>
         </View>
       </View>
       {/* BOTTOM BARRRRRRRRRRRRRRRR */}
