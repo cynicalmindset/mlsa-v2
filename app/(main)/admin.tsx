@@ -57,6 +57,9 @@ const Admin = () => {
                 justifyContent: "center",
                 borderRadius: theme.radius.xxl,
               }}
+              onPress={() => {
+                router.navigate("/AddEvent");
+              }}
             >
               <Text style={{ color: "white", opacity: 0.6 }}>Event</Text>
             </Pressable>
