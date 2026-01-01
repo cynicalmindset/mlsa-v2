@@ -6,9 +6,11 @@ import { theme } from "@/constants/theme";
 import { useAuth } from "@/context/authcontext";
 import { hp } from "@/helpers/common";
 import { getuserImagesrc } from "@/services/imageService";
+import { createorupdate } from "@/services/PostService";
 import { ResizeMode, Video } from "expo-av";
 import { Image } from "expo-image";
 import * as ImagePicker from "expo-image-picker";
+import { router } from "expo-router";
 import React, { useState } from "react";
 import { Alert, Pressable, StyleSheet, Text, View } from "react-native";
 //import { useSafeAreaInsets } from "react-native-safe-area-context";
@@ -49,12 +51,16 @@ const AddSponsors = () => {
     if (!file) return null;
     if (typeof file == "object") return true;
   };
-  const getFiletype = (file: ImagePicker.ImagePickerAsset) => {
+  const getFiletype = (file: ImagePicker.ImagePickerAsset | string) => {
     if (!file) return null;
     if (islocalfile(file)) {
-      return file.type;
+      return (file as ImagePicker.ImagePickerAsset).type;
     }
     // chekc for remote file
+    if (typeof file === "string" && file.includes("postImage")) {
+      return "image";
+    }
+    return "video";
   };
 
   const onsubmit = async () => {
@@ -67,6 +73,16 @@ const AddSponsors = () => {
       file,
       userId: user?.id,
     };
+    setloading(true);
+    let res = await createorupdate(data);
+    setloading(false);
+    console.log("post res", res);
+    if (res.success) {
+      setFile(null);
+      router.back();
+    } else {
+      Alert.alert("Post", "cant uplaod file right now , try later");
+    }
   };
   const [loading, setloading] = useState(false);
 
