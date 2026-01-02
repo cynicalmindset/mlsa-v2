@@ -23,10 +23,12 @@ import {
 
 //import { View } from "react-native-reanimated/lib/typescript/Animated";
 import group from "@/assets/illustration/group.jpeg";
+import Eventcards from "@/components/Eventcards";
+import { fetchEvents } from "@/services/EventService";
 import Sponsorcard from "@/services/Sponsorcard ";
 import { fetchSponsors } from "@/services/Sponsorservice";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
-const SUPABASE_URL = process.env.EXPO_PUBLIC_SUPABASE_URL;
+//const SUPABASE_URL = process.env.EXPO_PUBLIC_SUPABASE_URL;
 //import { ScrollView } from "react-native-reanimated/lib/typescript/Animated";
 const { width } = Dimensions.get("window");
 
@@ -47,75 +49,75 @@ const Home = () => {
   //   }
   // };
 
-  const dummyEvents = [
-    {
-      title: "MLSA Orientation Meetup",
-      description:
-        "An introductory session for new members to understand MLSA, its vision, and upcoming opportunities.",
-      poster: "https://picsum.photos/seed/event1/600/800",
-      location: "KIIT Campus, Auditorium Hall",
-      start_time: "2026-01-10T10:00:00",
-      end_time: "2026-01-10T12:00:00",
-      is_active: true,
-      website: "https://mlsa.community/orientation",
-    },
-    {
-      title: "UI/UX Design Workshop",
-      description:
-        "A hands-on workshop focused on design systems, spacing, grids, and real-world UX practices.",
-      poster: "https://picsum.photos/seed/event2/600/800",
-      location: "Design Lab, KIIT",
-      start_time: "2026-01-15T14:00:00",
-      end_time: "2026-01-15T17:00:00",
-      is_active: true,
-      website: "https://mlsa.community/uiux",
-    },
-    {
-      title: "Hackathon: Build for Impact",
-      description:
-        "A 24-hour hackathon where teams build solutions for real-world problems using modern tech stacks.",
-      poster: "https://picsum.photos/seed/event3/600/800",
-      location: "Innovation Hub, KIIT",
-      start_time: "2026-01-20T09:00:00",
-      end_time: "2026-01-21T09:00:00",
-      is_active: true,
-      website: "https://mlsa.community/hackathon",
-    },
-    {
-      title: "Tech Talk: AI in 2026",
-      description:
-        "An expert-led session discussing the future of artificial intelligence and its real-world impact.",
-      poster: "https://picsum.photos/seed/event4/600/800",
-      location: "Online (Live Session)",
-      start_time: "2026-01-25T18:00:00",
-      end_time: "2026-01-25T19:30:00",
-      is_active: true,
-      website: "https://mlsa.community/ai-talk",
-    },
-    {
-      title: "Open Source Contribution Day",
-      description:
-        "A collaborative event focused on contributing to open-source projects and learning Git/GitHub workflows.",
-      poster: "https://picsum.photos/seed/event5/600/800",
-      location: "Computer Lab 3, KIIT",
-      start_time: "2026-01-30T11:00:00",
-      end_time: "2026-01-30T16:00:00",
-      is_active: true,
-      website: "https://mlsa.community/opensource",
-    },
-  ];
+  // const dummyEvents = [
+  //   {
+  //     title: "MLSA Orientation Meetup",
+  //     description:
+  //       "An introductory session for new members to understand MLSA, its vision, and upcoming opportunities.",
+  //     poster: "https://picsum.photos/seed/event1/600/800",
+  //     location: "KIIT Campus, Auditorium Hall",
+  //     start_time: "2026-01-10T10:00:00",
+  //     end_time: "2026-01-10T12:00:00",
+  //     is_active: true,
+  //     website: "https://mlsa.community/orientation",
+  //   },
+  //   {
+  //     title: "UI/UX Design Workshop",
+  //     description:
+  //       "A hands-on workshop focused on design systems, spacing, grids, and real-world UX practices.",
+  //     poster: "https://picsum.photos/seed/event2/600/800",
+  //     location: "Design Lab, KIIT",
+  //     start_time: "2026-01-15T14:00:00",
+  //     end_time: "2026-01-15T17:00:00",
+  //     is_active: true,
+  //     website: "https://mlsa.community/uiux",
+  //   },
+  //   {
+  //     title: "Hackathon: Build for Impact",
+  //     description:
+  //       "A 24-hour hackathon where teams build solutions for real-world problems using modern tech stacks.",
+  //     poster: "https://picsum.photos/seed/event3/600/800",
+  //     location: "Innovation Hub, KIIT",
+  //     start_time: "2026-01-20T09:00:00",
+  //     end_time: "2026-01-21T09:00:00",
+  //     is_active: true,
+  //     website: "https://mlsa.community/hackathon",
+  //   },
+  //   {
+  //     title: "Tech Talk: AI in 2026",
+  //     description:
+  //       "An expert-led session discussing the future of artificial intelligence and its real-world impact.",
+  //     poster: "https://picsum.photos/seed/event4/600/800",
+  //     location: "Online (Live Session)",
+  //     start_time: "2026-01-25T18:00:00",
+  //     end_time: "2026-01-25T19:30:00",
+  //     is_active: true,
+  //     website: "https://mlsa.community/ai-talk",
+  //   },
+  //   {
+  //     title: "Open Source Contribution Day",
+  //     description:
+  //       "A collaborative event focused on contributing to open-source projects and learning Git/GitHub workflows.",
+  //     poster: "https://picsum.photos/seed/event5/600/800",
+  //     location: "Computer Lab 3, KIIT",
+  //     start_time: "2026-01-30T11:00:00",
+  //     end_time: "2026-01-30T16:00:00",
+  //     is_active: true,
+  //     website: "https://mlsa.community/opensource",
+  //   },
+  // ];
 
-  const dummySponsors = [
-    { id: "1", name: "Lighthouse", logo: require("@/assets/dummy/logo1.jpeg") },
-    {
-      id: "2",
-      name: "Pixel Studio",
-      logo: require("@/assets/dummy/logo2.jpeg"),
-    },
-    { id: "3", name: "Studio", logo: require("@/assets/dummy/logo3.jpeg") },
-    { id: "4", name: "Spark AI", logo: require("@/assets/dummy/logo4.jpeg") },
-    { id: "5", name: "Potato", logo: require("@/assets/dummy/logo5.jpeg") },
-  ];
+  // const dummySponsors = [
+  //   { id: "1", name: "Lighthouse", logo: require("@/assets/dummy/logo1.jpeg") },
+  //   {
+  //     id: "2",
+  //     name: "Pixel Studio",
+  //     logo: require("@/assets/dummy/logo2.jpeg"),
+  //   },
+  //   { id: "3", name: "Studio", logo: require("@/assets/dummy/logo3.jpeg") },
+  //   { id: "4", name: "Spark AI", logo: require("@/assets/dummy/logo4.jpeg") },
+  //   { id: "5", name: "Potato", logo: require("@/assets/dummy/logo5.jpeg") },
+  // ];
 
   //sponsors fetching here
   const [sponsor, setsponsor] = useState([]);
@@ -126,7 +128,20 @@ const Home = () => {
     let res = await fetchSponsors();
     console.log("sponsors", res.data);
     if (res.success && Array.isArray(res.data)) {
-      setsponsor([...res.data]); // 👈 THIS LINE FIXES IT
+      setsponsor([...res.data]);
+    }
+  };
+
+  //event fetching
+  const [event, setevent] = useState([]);
+  useEffect(() => {
+    getevents();
+  }, []);
+  const getevents = async () => {
+    let result = await fetchEvents();
+    console.log("eventssssssssss", result);
+    if (result.success && Array.isArray(result.data)) {
+      setevent([...result.data]);
     }
   };
 
@@ -382,6 +397,22 @@ const Home = () => {
             keyExtractor={(item) => item.id.toString()}
             renderItem={({ item }) => <Sponsorcard item={item} />}
           />
+
+          {/* EVENTSSSSSSSSSSS CARDSDSSSSSSS */}
+          <FlatList
+            data={event}
+            horizontal
+            showsHorizontalScrollIndicator={false}
+            // showsVerticalScrollIndicator={false}
+            contentContainerStyle={{
+              alignItems: "center",
+              paddingRight: wp(6),
+              paddingLeft: 0,
+            }}
+            removeClippedSubviews={false}
+            keyExtractor={(item) => item.id.toString()}
+            renderItem={({ item }) => <Eventcards item={item} />}
+          />
         </View>
       </View>
 
@@ -466,3 +497,5 @@ const styles = StyleSheet.create({
     //resizeMode: "contain",
   },
 });
+
+//kya laawde mera code dekh ke judge kr rha? aysa maru gai na betichod gand fat ke hath me aajyegi 7 rang ka mut doge lawde suwar ki aulad

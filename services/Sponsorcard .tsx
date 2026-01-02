@@ -12,6 +12,7 @@ const Sponsorcard = ({ item }: { item: any }) => {
       style={{
         alignItems: "center",
         marginRight: 20,
+        // justifyContent: "space-between",
       }}
     >
       <View

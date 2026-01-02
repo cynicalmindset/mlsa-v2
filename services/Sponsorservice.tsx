@@ -56,12 +56,12 @@ export const fetchSponsors = async () => {
 
     if (error) {
       console.log("getSponsors error", error);
-      return { success: false, data: data ?? [] }; // ✅ ALWAYS return data
+      return { success: false, data: data ?? [] };
     }
 
-    return { success: true, data: data ?? [] }; // ✅ safe fallback
+    return { success: true, data: data ?? [] };
   } catch (err) {
     console.log("getSponsors error", err);
-    return { success: false, data: [] }; // ✅ SAME SHAPE
+    return { success: false, data: [] };
   }
 };

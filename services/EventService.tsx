@@ -61,3 +61,40 @@ export const createEvent = async ({
     return { success: false, msg: "could not create event" };
   }
 };
+
+export const fetchEvents = async () => {
+  try {
+    const { data, error } = await supabase
+      .from("events")
+      .select("*")
+      .order("created_at", { ascending: false });
+    if (error) {
+      console.log("getEvent error", error);
+      return { success: false, data: data ?? [] };
+    }
+    return { success: true, data: data ?? [] };
+  } catch (err) {
+    console.log("getEvent error", err);
+    return { success: false, data: [] };
+  }
+};
+
+export const fetchEventById = async (id: string) => {
+  try {
+    const { data, error } = await supabase
+      .from("events")
+      .select("*")
+      .eq("id", id)
+      .single();
+
+    if (error) {
+      console.log("fetchEventById error", error);
+      return { success: false, data: null };
+    }
+
+    return { success: true, data };
+  } catch (err) {
+    console.log("fetchEventById error", err);
+    return { success: false, data: null };
+  }
+};
