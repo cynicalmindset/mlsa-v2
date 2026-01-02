@@ -40,9 +40,28 @@ export const createSponsor = async ({
       return { success: false, msg: "could not add sponsor" };
     }
 
-    return { success: true, data };
+    return { success: true, data: data };
   } catch (err) {
     console.log("createSponsor error", err);
     return { success: false, msg: "could not add sponsor" };
+  }
+};
+
+export const fetchSponsors = async () => {
+  try {
+    const { data, error } = await supabase
+      .from("sponsors")
+      .select("*")
+      .order("created_at", { ascending: false });
+
+    if (error) {
+      console.log("getSponsors error", error);
+      return { success: false, data: data ?? [] }; // ✅ ALWAYS return data
+    }
+
+    return { success: true, data: data ?? [] }; // ✅ safe fallback
+  } catch (err) {
+    console.log("getSponsors error", err);
+    return { success: false, data: [] }; // ✅ SAME SHAPE
   }
 };
