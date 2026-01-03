@@ -351,7 +351,7 @@ const Home = () => {
                         marginTop: 4,
                       }}
                       onPress={() => {
-                        router.navigate("/Society");
+                        router.navigate("/Projects");
                       }}
                     >
                       <Text style={{ color: "white" }}>Explore</Text>
