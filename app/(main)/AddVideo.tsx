@@ -12,7 +12,14 @@ import { Image } from "expo-image";
 import * as ImagePicker from "expo-image-picker";
 import { router } from "expo-router";
 import React, { useState } from "react";
-import { Alert, Pressable, StyleSheet, Text, View } from "react-native";
+import {
+  Alert,
+  Pressable,
+  StyleSheet,
+  Text,
+  TextInput,
+  View,
+} from "react-native";
 //import { useSafeAreaInsets } from "react-native-safe-area-context";
 //import { View } from "react-native-reanimated/lib/typescript/Animated";
 
@@ -21,6 +28,7 @@ import { Alert, Pressable, StyleSheet, Text, View } from "react-native";
 const AddSponsors = () => {
   const [file, setFile] = useState<ImagePicker.ImagePickerAsset | null>(null);
   const { user } = useAuth();
+  const [caption, setCaption] = useState("");
 
   const onpick = async (isImage: boolean) => {
     const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
@@ -72,6 +80,7 @@ const AddSponsors = () => {
     let data = {
       file,
       userId: user?.id,
+      caption: caption.trim() || null,
     };
     setloading(true);
     let res = await createorupdate(data);
@@ -79,6 +88,7 @@ const AddSponsors = () => {
     console.log("post res", res);
     if (res.success) {
       setFile(null);
+      setCaption("");
       router.back();
     } else {
       Alert.alert("Post", "cant uplaod file right now , try later");
@@ -134,6 +144,26 @@ const AddSponsors = () => {
               )}
             </View>
           )}
+          <View
+            style={{
+              width: "90%",
+              backgroundColor: theme.colors.lightPrimary,
+              borderRadius: theme.radius.lg,
+              padding: hp(1.5),
+            }}
+          >
+            <TextInput
+              placeholder="Write a caption..."
+              placeholderTextColor={theme.colors.offwhite}
+              style={{
+                color: "white",
+                minHeight: hp(6),
+              }}
+              multiline
+              value={caption}
+              onChangeText={setCaption}
+            />
+          </View>
 
           <View
             style={{

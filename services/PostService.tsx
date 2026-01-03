@@ -3,41 +3,55 @@ import { uploadfile } from "./imageService";
 
 export const createorupdate = async (post: any) => {
   try {
-    if (post.userId) {
-      post.user_id = post.userId;
-      delete post.userId;
-    }
-    // handle local picked file
+    let media_url = null;
+    let media_type = null;
+
     if (post.file && typeof post.file === "object") {
       const isImage = post.file.type === "image";
       const folderName = isImage ? "postImage" : "postVideos";
 
-      const fileResult = await uploadfile(folderName, post.file.uri, isImage);
+      const uploadRes = await uploadfile(folderName, post.file.uri, isImage);
 
-      if (!fileResult.success) {
-        return fileResult;
-      }
+      if (!uploadRes.success) return uploadRes;
 
-      post.media_url = fileResult.data;
-      post.media_type = isImage ? "image" : "video";
-
-      delete post.file;
+      media_url = uploadRes.data;
+      media_type = isImage ? "image" : "video";
     }
 
-    const { data, error } = await supabase
-      .from("posts")
-      .upsert(post)
-      .select()
-      .single();
+    const { data, error } = await supabase.from("posts").insert({
+      user_id: post.userId,
+      caption: post.caption,
+      media_url,
+      media_type,
+    });
 
     if (error) {
-      console.log("createPost error", error);
-      return { success: false, msg: "could not create your post aww" };
+      console.log("create post error", error);
+      return { success: false };
     }
 
     return { success: true, data };
-  } catch (error) {
-    console.log("createPost error", error);
-    return { success: false, msg: "could not create your post aww" };
+  } catch (err) {
+    console.log("create post error", err);
+    return { success: false };
+  }
+};
+
+export const fetchPost = async () => {
+  try {
+    const { data, error } = await supabase
+      .from("posts")
+      .select("*")
+      .order("created_at", { ascending: false });
+
+    if (error) {
+      console.log("post fetch error", error);
+      return { success: false, data: null };
+    }
+
+    return { success: true, data };
+  } catch (err) {
+    console.log("post fetch error", err);
+    return { success: false, data: null };
   }
 };

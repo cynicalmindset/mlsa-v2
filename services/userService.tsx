@@ -32,3 +32,23 @@ export const updateuser = async (userId: any, data: any) => {
     return { success: false, msg: (error as Error).message };
   }
 };
+
+export const fetchUserById = async (id: string) => {
+  try {
+    const { data, error } = await supabase
+      .from("users") // or profiles (public table only)
+      .select("id, name, image")
+      .eq("id", id)
+      .single();
+
+    if (error) {
+      console.log("fetch user error", error);
+      return null;
+    }
+
+    return data;
+  } catch (err) {
+    console.log("fetch user error", err);
+    return null;
+  }
+};
