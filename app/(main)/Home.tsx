@@ -33,6 +33,7 @@ import { useSafeAreaInsets } from "react-native-safe-area-context";
 const { width } = Dimensions.get("window");
 
 const Home = () => {
+  //const insert = useSafeAreaInsets()
   const router = useRouter();
   const insert = useSafeAreaInsets();
   // const onpress = async () => {
