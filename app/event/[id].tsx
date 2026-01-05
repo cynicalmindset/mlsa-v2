@@ -9,15 +9,33 @@ import { useLocalSearchParams } from "expo-router";
 import React, { useEffect, useState } from "react";
 import {
   ActivityIndicator,
+  Alert,
   Image,
+  Linking,
   ScrollView,
   StyleSheet,
   Text,
   View,
 } from "react-native";
+
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 const insert = useSafeAreaInsets;
 const EventDetails = () => {
+  const handleRegister = async () => {
+    if (!event?.website) {
+      Alert.alert("Link not available", "Registration link not found.");
+      return;
+    }
+
+    const supported = await Linking.canOpenURL(event.website);
+
+    if (supported) {
+      await Linking.openURL(event.website);
+    } else {
+      Alert.alert("Invalid link", "Cannot open this registration link.");
+    }
+  };
+
   const { id } = useLocalSearchParams<{ id: string }>();
   const [event, setEvent] = useState<any>(null);
   const [loading, setLoading] = useState(true);
@@ -84,7 +102,7 @@ const EventDetails = () => {
                 width: "90%",
                 height: hp(65),
                 borderRadius: theme.radius.xxl,
-                elevation: 6,
+
                 shadowOffset: { width: 0, height: 6 },
                 shadowOpacity: 0.18,
                 shadowRadius: 10,
@@ -195,7 +213,11 @@ const EventDetails = () => {
             </View>
           </View>
         </ScrollView>
-        <Button title="Register Now" buttonstyle={styles.btn} />
+        <Button
+          title="Register Now"
+          buttonstyle={styles.btn}
+          onPress={handleRegister}
+        />
       </View>
     </ScreenWrapper>
   );

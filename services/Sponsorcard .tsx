@@ -1,14 +1,39 @@
 import { hp } from "@/helpers/common";
 import React from "react";
-import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import {
+  Alert,
+  Image,
+  Linking,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from "react-native";
 //const SUPABASE_URL = process.env.EXPO_PUBLIC_SUPABASE_URL;
 import { supabaseUrl } from "@/constants";
 
 const Sponsorcard = ({ item }: { item: any }) => {
+  const handleRegister = async () => {
+    if (!item?.website) {
+      Alert.alert("Link not available", "Registration link not found.");
+      return;
+    }
+
+    const supported = await Linking.canOpenURL(item.website);
+
+    if (supported) {
+      await Linking.openURL(item.website);
+    } else {
+      Alert.alert("Invalid link", "Cannot open this registration link.");
+    }
+  };
+
   return (
     <TouchableOpacity
       key={item.id}
-      onPress={() => {}}
+      onPress={() => {
+        handleRegister();
+      }}
       style={{
         alignItems: "center",
         marginRight: 20,
