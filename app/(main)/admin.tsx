@@ -46,7 +46,9 @@ const Admin = () => {
                 borderRadius: theme.radius.xxl,
               }}
             >
-              <Text style={{ color: "white", opacity: 0.6 }}>Attendance</Text>
+              <Text style={{ color: "white", opacity: 0.6 }}>
+                Send{"\n"}Notification
+              </Text>
             </Pressable>
             <Pressable
               style={{
@@ -118,6 +120,7 @@ const Admin = () => {
                 justifyContent: "center",
                 borderRadius: theme.radius.xxl,
               }}
+              onPress={() => router.navigate("/AddProjects")}
             >
               <Text style={{ color: "white", opacity: 0.6 }}>Projects</Text>
             </Pressable>
