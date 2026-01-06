@@ -174,7 +174,7 @@ const AddSponsors = () => {
               borderRadius: theme.radius.xxl,
             }}
           >
-            <Pressable
+            {/* <Pressable
               style={{
                 height: hp(6),
                 width: hp(6),
@@ -188,7 +188,7 @@ const AddSponsors = () => {
               onPress={() => onpick(false)}
             >
               <Icon name="video" size={30} color="white" />
-            </Pressable>
+            </Pressable> */}
             <Pressable
               style={{
                 height: hp(6),

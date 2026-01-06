@@ -102,6 +102,41 @@ const Admin = () => {
               <Text style={{ color: "white", opacity: 0.6 }}>Sponsors</Text>
             </Pressable>
           </View>
+          <View
+            style={{
+              justifyContent: "space-between",
+              flexDirection: "row",
+              gap: hp(4),
+            }}
+          >
+            <Pressable
+              style={{
+                height: hp(12),
+                width: hp(12),
+                backgroundColor: theme.colors.lightPrimary,
+                alignItems: "center",
+                justifyContent: "center",
+                borderRadius: theme.radius.xxl,
+              }}
+            >
+              <Text style={{ color: "white", opacity: 0.6 }}>Projects</Text>
+            </Pressable>
+            <Pressable
+              style={{
+                height: hp(12),
+                width: hp(12),
+                backgroundColor: theme.colors.lightPrimary,
+                alignItems: "center",
+                justifyContent: "center",
+                borderRadius: theme.radius.xxl,
+              }}
+              onPress={() => {
+                router.navigate("/AddEvent");
+              }}
+            >
+              <Text style={{ color: "white", opacity: 0.6 }}>Members</Text>
+            </Pressable>
+          </View>
         </View>
 
         {/* BANNER IAMGE */}
