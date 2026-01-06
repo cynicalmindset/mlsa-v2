@@ -130,7 +130,7 @@ const AddProjects = () => {
 
         <View style={styles.input}>
           <TextInput
-            placeholder="Description"
+            placeholder="Desc , keep as less as posib , 3-5 liner "
             placeholderTextColor={theme.colors.offwhite}
             style={styles.text}
             multiline

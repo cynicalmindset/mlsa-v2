@@ -1,11 +1,29 @@
 import Header from "@/components/Header";
+import Projectcard from "@/components/Projectcard";
 import ScreenWrapper from "@/components/ScreenWrapper";
 import { theme } from "@/constants/theme";
 import { hp } from "@/helpers/common";
-import React from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { fetchProject } from "@/services/ProjectService";
+import { useRouter } from "expo-router";
+import React, { useEffect, useState } from "react";
+import { FlatList, StyleSheet, View } from "react-native";
+//import {} from "react-native-reanimated/lib/typescript/Animated";
 
 const Projects = () => {
+  const router = useRouter();
+  const [project, setproject] = useState([]);
+  useEffect(() => {
+    getporject();
+  }, []);
+
+  const getporject = async () => {
+    let res = await fetchProject();
+    console.log("projects", res.data);
+    if (res.success && Array.isArray(res.data)) {
+      setproject([...res.data]);
+    }
+  };
+
   return (
     <ScreenWrapper bg={theme.colors.primary}>
       <View style={{ marginHorizontal: hp(3) }}>
@@ -14,11 +32,23 @@ const Projects = () => {
       <View
         style={{
           flex: 1,
-          alignItems: "center",
-          justifyContent: "center",
+          // alignItems: "center",
+          marginTop: hp(4),
+          //justifyContent: "center",
         }}
       >
-        <Text style={{ color: theme.colors.offwhite }}>Work in Progress</Text>
+        <FlatList
+          data={project}
+          showsVerticalScrollIndicator={false}
+          showsHorizontalScrollIndicator={false}
+          contentContainerStyle={{
+            paddingBottom: hp(4),
+            paddingHorizontal: hp(3),
+            //width: "90%",
+          }}
+          keyExtractor={(item) => item.id.toString()}
+          renderItem={({ item }) => <Projectcard item={item} />}
+        />
       </View>
     </ScreenWrapper>
   );

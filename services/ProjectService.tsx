@@ -49,7 +49,7 @@ export const createProject = async ({
   }
 };
 
-export const fetchSponsors = async () => {
+export const fetchProject = async () => {
   try {
     const { data, error } = await supabase
       .from("projects")
