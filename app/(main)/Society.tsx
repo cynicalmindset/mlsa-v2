@@ -1,4 +1,4 @@
-import gang from "@/assets/illustration/gang.jpeg";
+import gang from "@/assets/dummy/group1.jpg";
 import logo from "@/assets/illustration/Group_5.png";
 import Button from "@/components/Button";
 import Header from "@/components/Header";
@@ -6,31 +6,34 @@ import ScreenWrapper from "@/components/ScreenWrapper";
 import { theme } from "@/constants/theme";
 import { hp, wp } from "@/helpers/common";
 import React from "react";
-import { Image, StyleSheet, Text, View } from "react-native";
+import { Image, ScrollView, StyleSheet, Text, View } from "react-native";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
+//import { ScrollView } from "react-native-reanimated/lib/typescript/Animated";
 //import { View } from "react-native-reanimated/lib/typescript/Animated";
 
 const Society = () => {
+  const insert = useSafeAreaInsets();
   return (
     <ScreenWrapper bg={theme.colors.primary}>
       {/* HEADER */}
       <View style={{ marginHorizontal: hp(2), marginVertical: wp(2) }}>
         <Header title="Know us" showavatar={true} />
       </View>
-      <View
-        style={{
-          marginHorizontal: hp(2),
-          alignItems: "center",
-          justifyContent: "space-between",
-          gap: hp(3),
+      <ScrollView
+        showsVerticalScrollIndicator={false}
+        contentContainerStyle={{
+          paddingHorizontal: hp(2),
+          paddingVertical: hp(2),
         }}
       >
         {/* HERO IMAGE */}
         <View
           style={{
-            marginTop: hp(2),
+            marginTop: hp(0.5),
             //backgroundColor: "white",
             height: hp(20),
             width: "100%",
+            marginBottom: hp(4),
           }}
         >
           <Image
@@ -42,25 +45,28 @@ const Society = () => {
             source={gang}
           ></Image>
         </View>
-
-        <Text
-          style={{
-            color: theme.colors.offwhite,
-            fontSize: hp(1),
-            marginTop: -hp(2),
-          }}
-        >
-          Former Members of MLSA 2020
-        </Text>
+        <View style={{ alignItems: "center" }}>
+          <Text
+            style={{
+              color: theme.colors.offwhite,
+              fontSize: hp(1),
+              marginTop: -hp(2),
+              marginBottom: hp(3),
+            }}
+          >
+            Members of MLSA 2023
+          </Text>
+        </View>
 
         {/* MLSA TITLE WITH LOGO */}
         <View
           style={{
             //backgroundColor: "white",
             flexDirection: "row",
-            marginHorizontal: hp(2),
+            // marginHorizontal: hp(1),
             gap: 10,
             alignItems: "center",
+            marginBottom: hp(2),
           }}
         >
           <Image
@@ -99,7 +105,21 @@ const Society = () => {
             Aliquam erat volutpat.
           </Text>
         </View>
-
+        {/* MEMBERSSSSSSSSSSSS */}
+        <View
+          style={{
+            alignItems: "center",
+            marginTop: hp(4),
+          }}
+        >
+          <Text style={{ color: "white", fontSize: hp(3), fontWeight: "500" }}>
+            Our Members
+          </Text>
+        </View>
+      </ScrollView>
+      <View
+        style={{ paddingBottom: insert.bottom + hp(1), alignItems: "center" }}
+      >
         <Button title="Visit Our Website" buttonstyle={styles.btn} />
       </View>
     </ScreenWrapper>
@@ -110,6 +130,6 @@ export default Society;
 
 const styles = StyleSheet.create({
   btn: {
-    width: "100%",
+    width: "90%",
   },
 });
