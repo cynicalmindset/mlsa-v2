@@ -22,7 +22,7 @@ import {
 } from "react-native";
 
 //import { View } from "react-native-reanimated/lib/typescript/Animated";
-import group from "@/assets/illustration/group.jpeg";
+import group from "@/assets/dummy/group.jpg";
 import Eventcards from "@/components/Eventcards";
 import { fetchEvents } from "@/services/EventService";
 import Sponsorcard from "@/services/Sponsorcard ";
