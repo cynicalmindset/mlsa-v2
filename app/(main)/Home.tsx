@@ -439,7 +439,7 @@ const Home = () => {
               style={{
                 //backgroundColor: "white",
                 width: "100%",
-                marginTop: hp(2),
+                marginTop: hp(0.2),
               }}
             >
               <Text

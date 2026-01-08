@@ -5,13 +5,25 @@ import Header from "@/components/Header";
 import ScreenWrapper from "@/components/ScreenWrapper";
 import { theme } from "@/constants/theme";
 import { hp, wp } from "@/helpers/common";
-import React from "react";
+import { fetchDomain } from "@/services/DomainService";
+import React, { useEffect, useState } from "react";
 import { Image, ScrollView, StyleSheet, Text, View } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 //import { ScrollView } from "react-native-reanimated/lib/typescript/Animated";
 //import { View } from "react-native-reanimated/lib/typescript/Animated";
 
 const Society = () => {
+  const [domians, setdomains] = useState([]);
+  useEffect(() => {
+    getdomain();
+  }, []);
+  const getdomain = async () => {
+    let res = await fetchDomain();
+    console.log("Domainsss", res.data);
+    if (res.success && Array.isArray(res.data)) {
+      setdomains([...res.data]);
+    }
+  };
   const insert = useSafeAreaInsets();
   return (
     <ScreenWrapper bg={theme.colors.primary}>
@@ -113,8 +125,11 @@ const Society = () => {
           }}
         >
           <Text style={{ color: "white", fontSize: hp(3), fontWeight: "500" }}>
-            Our Members
+            Our Domains
           </Text>
+          {/* DOMAIN CARDSSSSSS */}
+
+          <View></View>
         </View>
       </ScrollView>
       <View

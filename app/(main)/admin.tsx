@@ -170,10 +170,10 @@ const Admin = () => {
                 borderRadius: theme.radius.xxl,
               }}
               onPress={() => {
-                // router.navigate("/AddEvent");
+                router.navigate("/AddDomain");
               }}
             >
-              <Text style={{ color: "white", opacity: 0.6 }}>Experts</Text>
+              <Text style={{ color: "white", opacity: 0.6 }}>Domain</Text>
             </Pressable>
           </View>
         </View>

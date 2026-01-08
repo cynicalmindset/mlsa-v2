@@ -22,6 +22,8 @@ const Eventcards = ({ item }: { item: any }) => {
       style={{
         alignItems: "center",
         marginRight: 20,
+        width: wp(48),
+        marginBottom: hp(3),
         // justifyContent: "space-between",
       }}
     >
@@ -46,6 +48,8 @@ const Eventcards = ({ item }: { item: any }) => {
         />
       </View>
       <Text
+        numberOfLines={2}
+        ellipsizeMode="tail"
         style={{
           marginTop: hp(3),
           fontSize: hp(2),
@@ -53,7 +57,7 @@ const Eventcards = ({ item }: { item: any }) => {
           textAlign: "center",
           maxWidth: wp(40),
           fontWeight: "600",
-          //opacity: 0.7,
+          height: hp(5),
         }}
       >
         {item.title}
