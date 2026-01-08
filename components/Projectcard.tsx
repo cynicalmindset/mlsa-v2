@@ -3,10 +3,24 @@ import { hp } from "@/helpers/common";
 import { getuserImagesrc } from "@/services/imageService";
 import { Image } from "expo-image";
 import React from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { Alert, Linking, StyleSheet, Text, View } from "react-native";
 import Button from "./Button";
 
 const Projectcard = ({ item }: { item: any }) => {
+  const handleRegister = async () => {
+    if (!item?.github) {
+      Alert.alert("Link not available", "Registration link not found.");
+      return;
+    }
+
+    const supported = await Linking.canOpenURL(item.github);
+
+    if (supported) {
+      await Linking.openURL(item.github);
+    } else {
+      Alert.alert("Invalid link", "Cannot open this registration link.");
+    }
+  };
   return (
     <View style={styles.card}>
       <Image
@@ -17,7 +31,11 @@ const Projectcard = ({ item }: { item: any }) => {
 
       <Text style={styles.title}>{item.title}</Text>
       <Text style={styles.description}>{item.description}</Text>
-      <Button title="Github" buttonstyle={styles.btn} />
+      <Button
+        title="Github"
+        buttonstyle={styles.btn}
+        onPress={handleRegister}
+      />
     </View>
   );
 };
@@ -50,6 +68,6 @@ const styles = StyleSheet.create({
   },
   btn: {
     marginTop: hp(2),
-    //marginBottom: hp(0.5),
+    ///marginBottom: hp(0.5),
   },
 });

@@ -11,11 +11,15 @@ import * as ImagePicker from "expo-image-picker";
 import React, { useState } from "react";
 import {
   Alert,
+  KeyboardAvoidingView,
+  Platform,
+  ScrollView,
   StyleSheet,
   TextInput,
   TouchableOpacity,
   View,
 } from "react-native";
+//import { ScrollView } from "react-native-reanimated/lib/typescript/Animated";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 const AddProjects = () => {
@@ -93,62 +97,75 @@ const AddProjects = () => {
         <View style={{ marginTop: hp(2), marginBottom: hp(3) }}>
           <Header title="Add Project" showavatar />
         </View>
-        {image && (
-          <View
-            style={{
-              height: hp(40),
-              width: "90%",
-              borderRadius: theme.radius.xxl,
-              overflow: "hidden",
-              borderCurve: "continuous",
-              alignItems: "center",
-              flexDirection: "column",
-              gap: hp(4),
+        <KeyboardAvoidingView
+          behavior={Platform.OS === "ios" ? "padding" : "height"}
+          style={{ flex: 1 }}
+        >
+          <ScrollView
+            showsVerticalScrollIndicator={false}
+            showsHorizontalScrollIndicator={false}
+            keyboardShouldPersistTaps="handled"
+            contentContainerStyle={{
+              paddingBottom: hp(8),
             }}
           >
-            <Image
-              source={{ uri: getFileUri(image) }}
-              style={{ width: "100%", height: "100%" }}
-              resizeMode="cover"
-            />
-          </View>
-        )}
+            {image && (
+              <View
+                style={{
+                  height: hp(40),
+                  width: "90%",
+                  borderRadius: theme.radius.xxl,
+                  overflow: "hidden",
+                  borderCurve: "continuous",
+                  alignItems: "center",
+                  flexDirection: "column",
+                  gap: hp(4),
+                }}
+              >
+                <Image
+                  source={{ uri: getFileUri(image) }}
+                  style={{ width: "100%", height: "100%" }}
+                  resizeMode="cover"
+                />
+              </View>
+            )}
 
-        <View style={styles.input}>
-          <TextInput
-            placeholder="Enter Project Name"
-            placeholderTextColor={theme.colors.offwhite}
-            style={styles.text}
-            value={title}
-            onChangeText={setTitle}
-          />
+            <View style={styles.input}>
+              <TextInput
+                placeholder="Enter Project Name"
+                placeholderTextColor={theme.colors.offwhite}
+                style={styles.text}
+                value={title}
+                onChangeText={setTitle}
+              />
 
-          <TouchableOpacity onPress={pickImage} style={styles.imageBtn}>
-            <Icon name="image" strokeWidth={1.5} style={styles.icon} />
-          </TouchableOpacity>
-        </View>
+              <TouchableOpacity onPress={pickImage} style={styles.imageBtn}>
+                <Icon name="image" strokeWidth={1.5} style={styles.icon} />
+              </TouchableOpacity>
+            </View>
 
-        <View style={styles.input}>
-          <TextInput
-            placeholder="Desc , keep as less as posib , 3-5 liner "
-            placeholderTextColor={theme.colors.offwhite}
-            style={styles.text}
-            multiline
-            value={description}
-            onChangeText={setDescription}
-          />
-        </View>
+            <View style={styles.input}>
+              <TextInput
+                placeholder="Desc , keep as less as posib , 3-5 liner "
+                placeholderTextColor={theme.colors.offwhite}
+                style={styles.text}
+                multiline
+                value={description}
+                onChangeText={setDescription}
+              />
+            </View>
 
-        <View style={styles.input}>
-          <TextInput
-            placeholder="Github link"
-            placeholderTextColor={theme.colors.offwhite}
-            style={styles.text}
-            value={github}
-            onChangeText={setGithub}
-          />
-        </View>
-
+            <View style={styles.input}>
+              <TextInput
+                placeholder="Github link"
+                placeholderTextColor={theme.colors.offwhite}
+                style={styles.text}
+                value={github}
+                onChangeText={setGithub}
+              />
+            </View>
+          </ScrollView>
+        </KeyboardAvoidingView>
         <View
           style={{
             marginTop: "auto",

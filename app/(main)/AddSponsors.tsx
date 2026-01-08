@@ -11,10 +11,15 @@ import React, { useState } from "react";
 import {
   Image,
   StyleSheet,
+  Text,
   TextInput,
   TouchableOpacity,
   View,
 } from "react-native";
+import {
+  FlatList,
+  ScrollView,
+} from "react-native-reanimated/lib/typescript/Animated";
 //import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 //import { View } from "react-native-reanimated/lib/typescript/Animated";
@@ -184,6 +189,20 @@ const AddSponsors = () => {
             value={website}
             onChangeText={setwebsite}
           />
+        </View>
+        <View
+          style={{
+            height: hp(50),
+            width: "100%",
+            backgroundColor: theme.colors.lightPrimary,
+            alignItems: "center",
+            padding: 4,
+            borderRadius: theme.radius.xxl,
+          }}
+        >
+          {/* <ScrollView>
+            <FlatList/>
+          </Scrollview> */}
         </View>
       </View>
 
