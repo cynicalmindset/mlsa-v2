@@ -23,7 +23,9 @@ import {
 
 //import { View } from "react-native-reanimated/lib/typescript/Animated";
 import group from "@/assets/dummy/group.jpg";
+import Contentcard from "@/components/Contentcard";
 import Eventcards from "@/components/Eventcards";
+import { fetchContent } from "@/services/contentService";
 import { fetchEvents } from "@/services/EventService";
 import Sponsorcard from "@/services/Sponsorcard ";
 import { fetchSponsors } from "@/services/Sponsorservice";
@@ -146,6 +148,19 @@ const Home = () => {
     }
   };
 
+  //Content Fetching
+  const [content, setcontent] = useState([]);
+  useEffect(() => {
+    getcontent();
+  }, []);
+  const getcontent = async () => {
+    let result = await fetchContent();
+    console.log("contentssssssssss", result);
+    if (result.success && Array.isArray(result.data)) {
+      setcontent([...result.data]);
+    }
+  };
+
   return (
     <ScreenWrapper bg={theme.colors.primary}>
       <View style={styles.container}>
@@ -175,246 +190,288 @@ const Home = () => {
             />
           </Pressable>
         </View>
-
-        <View
-          style={{
-            flexDirection: "column",
-            justifyContent: "space-between",
-            alignItems: "center",
-            gap: hp(3),
-          }}
+        <ScrollView
+          showsHorizontalScrollIndicator={false}
+          showsVerticalScrollIndicator={false}
+          contentContainerStyle={{}}
         >
-          {/* HEADER CARDs  */}
-          <ScrollView
-            horizontal
-            showsHorizontalScrollIndicator={false}
-            pagingEnabled
-          >
-            <View style={{ flexDirection: "row", gap: 8 }}>
-              <View style={styles.headercard}>
-                {/* //<Text>hi</Text> */}
-                <View
-                  style={{
-                    justifyContent: "space-between",
-                    flexDirection: "column",
-                    //alignItems: "center",
-                    gap: 10,
-                  }}
-                >
-                  <View style={styles.left}>
-                    <Text
-                      style={{
-                        fontSize: hp(4),
-                        fontWeight: "500",
-                        color: "white",
-                        //marginBottom: 3,
-                        //marginTop: -6,
-                        //marginTop: 2,
-                      }}
-                    >
-                      MLSA
-                    </Text>
-                    <Text
-                      style={{
-                        color: "white",
-                        opacity: 0.7,
-                        fontSize: hp(1.5),
-                        //marginBottom: 10,
-                        marginTop: -3,
-                      }}
-                    >
-                      Know how this all got Started!
-                    </Text>
-                    <Pressable
-                      style={{
-                        backgroundColor: "#552BD4",
-                        padding: 8,
-                        alignItems: "center",
-                        borderRadius: theme.radius.sm,
-                        borderCurve: "continuous",
-                        maxWidth: 100,
-                        marginTop: 4,
-                      }}
-                      onPress={() => {
-                        router.navigate("/Society");
-                      }}
-                    >
-                      <Text style={{ color: "white" }}>Details</Text>
-                    </Pressable>
-                  </View>
-
-                  <View style={styles.right}>
-                    <Image style={styles.headerimg} source={group}></Image>
-                  </View>
-                </View>
-              </View>
-
-              <View style={styles.headercard}>
-                {/* //<Text>hi</Text> */}
-                <View
-                  style={{
-                    justifyContent: "space-between",
-                    flexDirection: "column",
-                    //alignItems: "center",
-                    gap: 10,
-                  }}
-                >
-                  <View style={styles.left}>
-                    <Text
-                      style={{
-                        fontSize: hp(3.5),
-                        fontWeight: "500",
-                        color: "white",
-                        //marginBottom: 3,
-                        //marginTop: -6,
-                        //marginTop: 2,
-                      }}
-                    >
-                      Gallery
-                    </Text>
-                    <Text
-                      style={{
-                        color: "white",
-                        opacity: 0.7,
-                        fontSize: hp(1.5),
-                        //marginBottom: 10,
-                        marginTop: -3,
-                      }}
-                    >
-                      Some of our most memorial moments
-                    </Text>
-                    <Pressable
-                      style={{
-                        backgroundColor: "#10a151ff",
-                        padding: 8,
-                        alignItems: "center",
-                        borderRadius: theme.radius.sm,
-                        borderCurve: "continuous",
-                        maxWidth: 100,
-                        marginTop: 4,
-                      }}
-                      onPress={() => {
-                        router.navigate("/Moments");
-                      }}
-                    >
-                      <Text style={{ color: "white" }}>Explore</Text>
-                    </Pressable>
-                  </View>
-
-                  <View style={styles.right}>
-                    <Image style={styles.headerimg} source={funny}></Image>
-                  </View>
-                </View>
-              </View>
-
-              <View style={styles.headercard}>
-                {/* //<Text>hi</Text> */}
-                <View
-                  style={{
-                    justifyContent: "space-between",
-                    flexDirection: "column",
-                    //alignItems: "center",
-                    gap: 10,
-                  }}
-                >
-                  <View style={styles.left}>
-                    <Text
-                      style={{
-                        fontSize: hp(3.5),
-                        fontWeight: "500",
-                        color: "white",
-                        //marginBottom: 3,
-                        //marginTop: -6,
-                        //marginTop: 2,
-                      }}
-                    >
-                      Projects
-                    </Text>
-                    <Text
-                      style={{
-                        color: "white",
-                        opacity: 0.7,
-                        fontSize: hp(1.5),
-                        //marginBottom: 10,
-                        marginTop: -3,
-                      }}
-                    >
-                      thats what make us {"\n"}Stand out!
-                    </Text>
-                    <Pressable
-                      style={{
-                        backgroundColor: "#ff8843ff",
-                        padding: 8,
-                        alignItems: "center",
-                        borderRadius: theme.radius.sm,
-                        borderCurve: "continuous",
-                        maxWidth: 100,
-                        marginTop: 4,
-                      }}
-                      onPress={() => {
-                        router.navigate("/Projects");
-                      }}
-                    >
-                      <Text style={{ color: "white" }}>Explore</Text>
-                    </Pressable>
-                  </View>
-
-                  <View style={styles.right}>
-                    <Image style={styles.headerimg} source={project}></Image>
-                  </View>
-                </View>
-              </View>
-            </View>
-          </ScrollView>
-
-          {/* SPONSORS */}
-
           <View
             style={{
-              //backgroundColor: "white",
-              width: "100%",
+              flexDirection: "column",
+              justifyContent: "space-between",
+              alignItems: "center",
+              gap: hp(3),
             }}
           >
-            <Text
+            {/* HEADER CARDs  */}
+            <ScrollView
+              horizontal
+              showsHorizontalScrollIndicator={false}
+              pagingEnabled
+            >
+              <View style={{ flexDirection: "row", gap: 8 }}>
+                <View style={styles.headercard}>
+                  {/* //<Text>hi</Text> */}
+                  <View
+                    style={{
+                      justifyContent: "space-between",
+                      flexDirection: "column",
+                      //alignItems: "center",
+                      gap: 10,
+                    }}
+                  >
+                    <View style={styles.left}>
+                      <Text
+                        style={{
+                          fontSize: hp(4),
+                          fontWeight: "500",
+                          color: "white",
+                          //marginBottom: 3,
+                          //marginTop: -6,
+                          //marginTop: 2,
+                        }}
+                      >
+                        MLSA
+                      </Text>
+                      <Text
+                        style={{
+                          color: "white",
+                          opacity: 0.7,
+                          fontSize: hp(1.5),
+                          //marginBottom: 10,
+                          marginTop: -3,
+                        }}
+                      >
+                        Know how this all got Started!
+                      </Text>
+                      <Pressable
+                        style={{
+                          backgroundColor: "#552BD4",
+                          padding: 8,
+                          alignItems: "center",
+                          borderRadius: theme.radius.sm,
+                          borderCurve: "continuous",
+                          maxWidth: 100,
+                          marginTop: 4,
+                        }}
+                        onPress={() => {
+                          router.navigate("/Society");
+                        }}
+                      >
+                        <Text style={{ color: "white" }}>Details</Text>
+                      </Pressable>
+                    </View>
+
+                    <View style={styles.right}>
+                      <Image style={styles.headerimg} source={group}></Image>
+                    </View>
+                  </View>
+                </View>
+
+                <View style={styles.headercard}>
+                  {/* //<Text>hi</Text> */}
+                  <View
+                    style={{
+                      justifyContent: "space-between",
+                      flexDirection: "column",
+                      //alignItems: "center",
+                      gap: 10,
+                    }}
+                  >
+                    <View style={styles.left}>
+                      <Text
+                        style={{
+                          fontSize: hp(3.5),
+                          fontWeight: "500",
+                          color: "white",
+                          //marginBottom: 3,
+                          //marginTop: -6,
+                          //marginTop: 2,
+                        }}
+                      >
+                        Gallery
+                      </Text>
+                      <Text
+                        style={{
+                          color: "white",
+                          opacity: 0.7,
+                          fontSize: hp(1.5),
+                          //marginBottom: 10,
+                          marginTop: -3,
+                        }}
+                      >
+                        Some of our most memorial moments
+                      </Text>
+                      <Pressable
+                        style={{
+                          backgroundColor: "#10a151ff",
+                          padding: 8,
+                          alignItems: "center",
+                          borderRadius: theme.radius.sm,
+                          borderCurve: "continuous",
+                          maxWidth: 100,
+                          marginTop: 4,
+                        }}
+                        onPress={() => {
+                          router.navigate("/Moments");
+                        }}
+                      >
+                        <Text style={{ color: "white" }}>Explore</Text>
+                      </Pressable>
+                    </View>
+
+                    <View style={styles.right}>
+                      <Image style={styles.headerimg} source={funny}></Image>
+                    </View>
+                  </View>
+                </View>
+
+                <View style={styles.headercard}>
+                  {/* //<Text>hi</Text> */}
+                  <View
+                    style={{
+                      justifyContent: "space-between",
+                      flexDirection: "column",
+                      //alignItems: "center",
+                      gap: 10,
+                    }}
+                  >
+                    <View style={styles.left}>
+                      <Text
+                        style={{
+                          fontSize: hp(3.5),
+                          fontWeight: "500",
+                          color: "white",
+                          //marginBottom: 3,
+                          //marginTop: -6,
+                          //marginTop: 2,
+                        }}
+                      >
+                        Projects
+                      </Text>
+                      <Text
+                        style={{
+                          color: "white",
+                          opacity: 0.7,
+                          fontSize: hp(1.5),
+                          //marginBottom: 10,
+                          marginTop: -3,
+                        }}
+                      >
+                        thats what make us {"\n"}Stand out!
+                      </Text>
+                      <Pressable
+                        style={{
+                          backgroundColor: "#ff8843ff",
+                          padding: 8,
+                          alignItems: "center",
+                          borderRadius: theme.radius.sm,
+                          borderCurve: "continuous",
+                          maxWidth: 100,
+                          marginTop: 4,
+                        }}
+                        onPress={() => {
+                          router.navigate("/Projects");
+                        }}
+                      >
+                        <Text style={{ color: "white" }}>Explore</Text>
+                      </Pressable>
+                    </View>
+
+                    <View style={styles.right}>
+                      <Image style={styles.headerimg} source={project}></Image>
+                    </View>
+                  </View>
+                </View>
+              </View>
+            </ScrollView>
+
+            {/* SPONSORS */}
+
+            <View
               style={{
-                color: "white",
-                fontSize: hp(3),
-                fontWeight: "600",
-                marginLeft: hp(0.7),
+                //backgroundColor: "white",
+                width: "100%",
               }}
             >
-              Sponsors
-            </Text>
+              <Text
+                style={{
+                  color: "white",
+                  fontSize: hp(3),
+                  fontWeight: "600",
+                  marginLeft: hp(0.7),
+                }}
+              >
+                Sponsors
+              </Text>
+            </View>
+
+            {/* SPONSORS LOGO SECTIONS */}
+
+            <FlatList
+              data={sponsor}
+              horizontal
+              showsHorizontalScrollIndicator={false}
+              contentContainerStyle={{ paddingRight: wp(3), paddingLeft: 0 }}
+              removeClippedSubviews={false}
+              keyExtractor={(item) => item.id.toString()}
+              renderItem={({ item }) => <Sponsorcard item={item} />}
+            />
+
+            {/* EVENTSSSSSSSSSSS CARDSDSSSSSSS */}
+            <FlatList
+              data={event}
+              horizontal
+              showsHorizontalScrollIndicator={false}
+              // showsVerticalScrollIndicator={false}
+              contentContainerStyle={{
+                alignItems: "center",
+                paddingRight: wp(6),
+                paddingLeft: 0,
+              }}
+              removeClippedSubviews={false}
+              keyExtractor={(item) => item.id.toString()}
+              renderItem={({ item }) => <Eventcards item={item} />}
+            />
+
+            {/* CONTENTTTTTTTTTT ehading*/}
+            <View
+              style={{
+                //backgroundColor: "white",
+                width: "100%",
+                marginTop: hp(2),
+              }}
+            >
+              <Text
+                style={{
+                  color: "white",
+                  fontSize: hp(3),
+                  fontWeight: "600",
+                  marginLeft: hp(0.7),
+                }}
+              >
+                Our Articles
+              </Text>
+            </View>
+
+            {/* CONTENT CARDSSSSSSSSSSS */}
+
+            <FlatList
+              data={content}
+              horizontal
+              showsHorizontalScrollIndicator={false}
+              contentContainerStyle={{
+                paddingRight: wp(3),
+                paddingLeft: 0,
+              }}
+              removeClippedSubviews={false}
+              keyExtractor={(item) => item.id.toString()}
+              renderItem={({ item }) => <Contentcard item={item} />}
+            />
+
+            {/* END */}
           </View>
-
-          {/* SPONSORS LOGO SECTIONS */}
-
-          <FlatList
-            data={sponsor}
-            horizontal
-            showsHorizontalScrollIndicator={false}
-            contentContainerStyle={{ paddingRight: wp(3), paddingLeft: 0 }}
-            removeClippedSubviews={false}
-            keyExtractor={(item) => item.id.toString()}
-            renderItem={({ item }) => <Sponsorcard item={item} />}
-          />
-
-          {/* EVENTSSSSSSSSSSS CARDSDSSSSSSS */}
-          <FlatList
-            data={event}
-            horizontal
-            showsHorizontalScrollIndicator={false}
-            // showsVerticalScrollIndicator={false}
-            contentContainerStyle={{
-              alignItems: "center",
-              paddingRight: wp(6),
-              paddingLeft: 0,
-            }}
-            removeClippedSubviews={false}
-            keyExtractor={(item) => item.id.toString()}
-            renderItem={({ item }) => <Eventcards item={item} />}
-          />
-        </View>
+        </ScrollView>
       </View>
 
       {/* BOTTOM BARRRRRRRRRRRRRRRR */}

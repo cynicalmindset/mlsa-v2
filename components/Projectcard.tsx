@@ -30,7 +30,9 @@ const Projectcard = ({ item }: { item: any }) => {
       />
 
       <Text style={styles.title}>{item.title}</Text>
-      <Text style={styles.description}>{item.description}</Text>
+      <Text ellipsizeMode="tail" numberOfLines={4} style={styles.description}>
+        {item.description}
+      </Text>
       <Button
         title="Github"
         buttonstyle={styles.btn}
@@ -67,7 +69,7 @@ const styles = StyleSheet.create({
     opacity: 0.8,
   },
   btn: {
-    marginTop: hp(2),
+    marginTop: hp(3),
     ///marginBottom: hp(0.5),
   },
 });

@@ -4,8 +4,8 @@ import Header from "@/components/Header";
 import ScreenWrapper from "@/components/ScreenWrapper";
 import { theme } from "@/constants/theme";
 import { hp } from "@/helpers/common";
-import { supabase } from "@/lib/supabase";
-import { getuserImagesrc, uploadfile } from "@/services/imageService";
+import { createContent } from "@/services/contentService";
+import { getuserImagesrc } from "@/services/imageService";
 import * as ImagePicker from "expo-image-picker";
 import React, { useState } from "react";
 import {
@@ -19,84 +19,52 @@ import {
 
 //import { View } from "react-native-reanimated/lib/typescript/Animated";
 
-const AddSponsors = () => {
-  const [name, setName] = useState("");
+const AddContent = () => {
+  const [title, settitle] = useState("");
   const [website, setwebsite] = useState("");
   const [loading, setLoading] = useState(false);
   const onsubmit = async () => {
-    try {
-      if (!name.trim()) {
-        alert("Please enter sponsor name");
-        return;
-      }
+    setLoading(true);
 
-      if (!file) {
-        alert("Please select a logo");
-        return;
-      }
+    const res = await createContent({
+      title,
+      website,
+      image,
+    });
 
-      setLoading(true);
-
-      // upload logo to storage
-      const uploadRes = await uploadfile(
-        "sponsorLogos",
-        file.uri,
-        true // image only
-      );
-
-      if (!uploadRes.success) {
-        alert(uploadRes.msg || "Logo upload failed");
-        setLoading(false);
-        return;
-      }
-
-      // insert sponsor in DB
-      const { error } = await supabase.from("sponsors").insert({
-        name: name.trim(),
-        logo: uploadRes.data, // storage path
-        website: website.trim() || null,
-      });
-
-      if (error) {
-        console.log("createSponsor error", error);
-        alert("Could not add sponsor");
-        setLoading(false);
-        return;
-      }
-
-      // success
-      alert("Sponsor added successfully 🎉");
-      setName("");
-      setwebsite("");
-      setFile(null);
-    } catch (err) {
-      console.log("onsubmit error", err);
-      alert("Something went wrong");
-    } finally {
+    if (!res.success) {
+      alert(res.msg);
       setLoading(false);
+      return;
     }
+
+    alert("Content added successfully 🎉");
+    settitle("");
+    setwebsite("");
+    setimage(null);
+    setLoading(false);
   };
 
   const islocalfile = (file: any) => {
     if (!file) return null;
     if (typeof file == "object") return true;
   };
-  const [file, setFile] = useState<ImagePicker.ImagePickerAsset | null>(null);
-  const getFileUri = (file: any) => {
-    if (!file) return null;
-    if (typeof file === "object") return file.uri;
-    return getuserImagesrc(file);
+  const [image, setimage] = useState<ImagePicker.ImagePickerAsset | null>(null);
+  const getFileUri = (image: any) => {
+    if (!image) return null;
+    if (typeof image === "object") return image.uri;
+    return getuserImagesrc(image);
   };
 
   const onpick = async (p0: boolean) => {
     let res = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.Images,
       allowsEditing: true,
-      aspect: [4, 4],
+      //aspect: [4, 4],
       quality: 0.6,
     });
     if (!res.canceled) {
-      setFile(res.assets[0]);
+      setimage(res.assets[0]);
     }
   };
   //const insert = useSafeAreaInsets();
@@ -115,7 +83,7 @@ const AddSponsors = () => {
           alignItems: "center",
         }}
       >
-        {file && (
+        {image && (
           <View
             style={{
               height: hp(40),
@@ -129,7 +97,7 @@ const AddSponsors = () => {
             }}
           >
             <Image
-              source={{ uri: getFileUri(file) }}
+              source={{ uri: getFileUri(image) }}
               style={{ width: "100%", height: "100%" }}
               resizeMode="cover"
             />
@@ -137,11 +105,11 @@ const AddSponsors = () => {
         )}
         <View style={styles.input}>
           <TextInput
-            placeholder="Enter Brand Name"
+            placeholder="Enter Title"
             placeholderTextColor={theme.colors.offwhite}
             style={{ color: theme.colors.offwhite }}
-            value={name}
-            onChangeText={setName}
+            value={title}
+            onChangeText={settitle}
           />
 
           <TouchableOpacity
@@ -158,7 +126,7 @@ const AddSponsors = () => {
             <Icon name="image" strokeWidth={1.5} style={styles.icon} />
             <TouchableOpacity
               onPress={() => {
-                setFile(null);
+                setimage(null);
               }}
             >
               <Icon name="delete" strokeWidth={1.5} style={styles.icon} />
@@ -206,7 +174,7 @@ const AddSponsors = () => {
   );
 };
 
-export default AddSponsors;
+export default AddContent;
 
 const styles = StyleSheet.create({
   input: {
