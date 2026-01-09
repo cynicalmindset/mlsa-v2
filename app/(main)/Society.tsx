@@ -1,13 +1,21 @@
 import gang from "@/assets/dummy/group1.jpg";
 import logo from "@/assets/illustration/Group_5.png";
 import Button from "@/components/Button";
+import Domaincard from "@/components/Domaincard";
 import Header from "@/components/Header";
 import ScreenWrapper from "@/components/ScreenWrapper";
 import { theme } from "@/constants/theme";
 import { hp, wp } from "@/helpers/common";
 import { fetchDomain } from "@/services/DomainService";
 import React, { useEffect, useState } from "react";
-import { Image, ScrollView, StyleSheet, Text, View } from "react-native";
+import {
+  FlatList,
+  Image,
+  ScrollView,
+  StyleSheet,
+  Text,
+  View,
+} from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 //import { ScrollView } from "react-native-reanimated/lib/typescript/Animated";
 //import { View } from "react-native-reanimated/lib/typescript/Animated";
@@ -129,7 +137,24 @@ const Society = () => {
           </Text>
           {/* DOMAIN CARDSSSSSS */}
 
-          <View></View>
+          <View>
+            <FlatList
+              data={domians}
+              horizontal
+              showsHorizontalScrollIndicator={false}
+              // showsVerticalScrollIndicator={false}
+              contentContainerStyle={{
+                alignItems: "center",
+                paddingRight: wp(6),
+                paddingLeft: 0,
+              }}
+              removeClippedSubviews={false}
+              keyExtractor={(item: { id: { toString: () => any } }) =>
+                item.id.toString()
+              }
+              renderItem={({ item }) => <Domaincard item={item} />}
+            />
+          </View>
         </View>
       </ScrollView>
       <View
