@@ -11,6 +11,7 @@ import React, { useEffect, useState } from "react";
 import {
   FlatList,
   Image,
+  Linking,
   ScrollView,
   StyleSheet,
   Text,
@@ -138,29 +139,31 @@ const Society = () => {
           {/* DOMAIN CARDSSSSSS */}
 
           <View>
-            <FlatList
-              data={domians}
-              horizontal
-              showsHorizontalScrollIndicator={false}
-              // showsVerticalScrollIndicator={false}
-              contentContainerStyle={{
-                alignItems: "center",
-                paddingRight: wp(6),
-                paddingLeft: 0,
-              }}
-              removeClippedSubviews={false}
-              keyExtractor={(item: { id: { toString: () => any } }) =>
-                item.id.toString()
-              }
-              renderItem={({ item }) => <Domaincard item={item} />}
-            />
+            <View style={{ height: hp(30) }}>
+              <FlatList
+                data={domians}
+                horizontal
+                showsHorizontalScrollIndicator={false}
+                contentContainerStyle={{
+                  alignItems: "center",
+                  paddingRight: wp(6),
+                  paddingLeft: wp(6),
+                }}
+                keyExtractor={(item) => item.id.toString()}
+                renderItem={({ item }) => <Domaincard item={item} />}
+              />
+            </View>
           </View>
         </View>
       </ScrollView>
       <View
         style={{ paddingBottom: insert.bottom + hp(1), alignItems: "center" }}
       >
-        <Button title="Visit Our Website" buttonstyle={styles.btn} />
+        <Button
+          title="Visit Our Website"
+          buttonstyle={styles.btn}
+          onPress={() => Linking.openURL("https://www.mlsakiit.com/")}
+        />
       </View>
     </ScreenWrapper>
   );

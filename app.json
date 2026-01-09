@@ -4,7 +4,7 @@
     "slug": "mlsa-v2",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/illustration/Group_5.png",
+    "icon": "./assets/mainlogo/mainlogo.png",
     "scheme": "mlsav2",
     "userInterfaceStyle": "dark",
     "newArchEnabled": true,
@@ -15,7 +15,7 @@
     "android": {
       "package": "com.mlsa.app",
       "adaptiveIcon": {
-        "foregroundImage": "./assets/illustration/Group_5.png",
+        "foregroundImage": "./assets/mainlogo/mainlogo.png",
         "backgroundColor": "#000000"
       },
       "edgeToEdgeEnabled": true
@@ -26,7 +26,7 @@
         "expo-splash-screen",
         {
           "image": "./assets/illustration/Group_5.png",
-          "imageWidth": 50,
+          "imageWidth": 200,
           "resizeMode": "contain",
           "backgroundColor": "#000000"
         }
