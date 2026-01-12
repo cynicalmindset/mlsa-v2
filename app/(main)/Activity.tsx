@@ -23,7 +23,5 @@ const Activity = () => {
     </ScreenWrapper>
   );
 };
-
 export default Activity;
-
 const styles = StyleSheet.create({});

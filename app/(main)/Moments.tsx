@@ -6,9 +6,8 @@ import { hp, wp } from "@/helpers/common";
 import { fetchPost } from "@/services/PostService";
 import React, { useEffect, useState } from "react";
 import { FlatList, StyleSheet, View } from "react-native";
-//import { FlatList } from "react-native-reanimated/lib/typescript/Animated";
+
 import { useSafeAreaInsets } from "react-native-safe-area-context";
-//import { View } from "react-native-reanimated/lib/typescript/Animated";
 
 const AddSponsors = () => {
   const insert = useSafeAreaInsets();
